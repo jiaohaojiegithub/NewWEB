@@ -19,7 +19,6 @@ using NewWEBAPI.ServiceLogic;
 using NJsonSchema;
 using NSwag.AspNetCore;
 using System.Reflection;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace NewWEBAPI
 {
@@ -73,10 +72,6 @@ namespace NewWEBAPI
             services.AddScoped<IUser_LoginRepository, User_LoginRepository>();
             #endregion
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,38 +87,27 @@ namespace NewWEBAPI
             }
             app.UseStaticFiles();
             //Swagger UI 显示版本的信息：
-            //app.UseSwagger(typeof(Startup).Assembly, settings =>
-            //{
-            //    settings.PostProcess = document =>
-            //    {
-            //        document.Info.Version = "v1";
-            //        document.Info.Title = "ToDo API";
-            //        document.Info.Description = "A simple ASP.NET Core web API";
-            //        document.Info.TermsOfService = "None";
-            //        document.Info.Contact = new NSwag.SwaggerContact
-            //        {
-            //            Name = "Shayne Boyer",
-            //            Email = string.Empty,
-            //            Url = "https://twitter.com/spboyer"
-            //        };
-            //        document.Info.License = new NSwag.SwaggerLicense
-            //        {
-            //            Name = "Use under LICX",
-            //            Url = "https://example.com/license"
-            //        };
-            //    };
-            //});
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
+            app.UseSwagger(typeof(Startup).Assembly, settings =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                c.RoutePrefix = string.Empty;
+                settings.PostProcess = document =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "ToDo API";
+                    document.Info.Description = "A simple ASP.NET Core web API";
+                    document.Info.TermsOfService = "None";
+                    document.Info.Contact = new NSwag.SwaggerContact
+                    {
+                        Name = "Shayne Boyer",
+                        Email = string.Empty,
+                        Url = "https://twitter.com/spboyer"
+                    };
+                    document.Info.License = new NSwag.SwaggerLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = "https://example.com/license"
+                    };
+                };
             });
-
             //添加Swagger UI显示
             app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
             {

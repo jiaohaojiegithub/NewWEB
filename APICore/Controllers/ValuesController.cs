@@ -3,36 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using NewWEB.Log;
-using NewWEBAPI.Interfaces;
 
-namespace NewWEBAPI.Controllers
+namespace APICore.Controllers
 {
+    /// <summary>
+    /// 初始API参考
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IUser_LoginRepository _LoginRepository;
-        //创建日志
-        private readonly ILogger _logger;
-        public ValuesController(IUser_LoginRepository loginRepository, ILogger<ValuesController> logger)
-        {
-            _LoginRepository = loginRepository;
-            _logger = logger;
-        }
-        //Get api/ApiUser_Login
+        /// <summary>
+        /// 获取所有数据
+        /// </summary>
+        /// <remarks>备注：返回[ "value1", "value2" ]</remarks>
+        /// <returns></returns>
+        // GET api/values
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            var userLogin = await _LoginRepository.ListAsync();
-            _logger.LogInformation(LoggingEvents.GetItem, "获取All User_Login");
-            return Ok(userLogin);
+            return new string[] { "value1", "value2" };
         }
+
+        /// <summary>
+        /// 获取指定ID的数据
+        /// </summary>
+        /// <param name="id">测试ID</param>
+        /// <returns></returns>
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
+            //添加对控制器方法的说明1
             return "value";
         }
 

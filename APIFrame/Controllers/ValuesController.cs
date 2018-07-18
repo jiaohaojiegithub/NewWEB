@@ -3,32 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using NewWEB.Log;
-using NewWEBAPI.Interfaces;
 
-namespace NewWEBAPI.Controllers
+namespace APIFrame.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IUser_LoginRepository _LoginRepository;
-        //创建日志
-        private readonly ILogger _logger;
-        public ValuesController(IUser_LoginRepository loginRepository, ILogger<ValuesController> logger)
-        {
-            _LoginRepository = loginRepository;
-            _logger = logger;
-        }
-        //Get api/ApiUser_Login
+        // GET api/values
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            var userLogin = await _LoginRepository.ListAsync();
-            _logger.LogInformation(LoggingEvents.GetItem, "获取All User_Login");
-            return Ok(userLogin);
+            return new string[] { "value1", "value2" };
         }
+
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
