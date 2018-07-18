@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using APICore.AuthHelper;
 using APICore.Interfaces;
 using APICore.Models;
 using APICore.Services;
@@ -124,6 +125,9 @@ namespace APICore
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiHelp V1");
                 c.RoutePrefix = string.Empty;
             });
+            #endregion
+            #region TokenAuth
+            app.UseMiddleware<TokenAuth>();
             #endregion
             app.UseMvc();
             

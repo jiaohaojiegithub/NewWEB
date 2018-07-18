@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Token;
-using Newtonsoft.Json;
 namespace APICore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SystemController : ControllerBase
+    public class SystemController : Controller
     {
         #region Token
         /// <summary>

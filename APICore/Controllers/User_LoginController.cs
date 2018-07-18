@@ -5,13 +5,18 @@ using System.Threading.Tasks;
 using APICore.Interfaces;
 using APICore.Models;
 using DBModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APICore.Controllers
 {
+    /// <summary>
+    /// User_Login操作API
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "Admin")]
     public class User_LoginController : ControllerBase
     {
         private readonly IUser_LoginRepository _LoginRepository;
