@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title></title>
+</head>
+<body>
+    <div>
+        <a href="https://localhost:44305/api/Values">获取Values</a>
+        <button id="ches" value="测试">测试</button>
+        <button id="ches1" value="测试2">测试2</button>
+    </div>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $("#ches").click(function () {
+            $.ajax({
+                type: "Get",
+                url: "https://localhost:44305/api/Values",
+                dataType: "json",
+                //data: {1},
+                //async: true,
+                success: function (x) {
+                    alert("成功");
+                    alert(JSON.stringify(x));
+                },
+                Error: function (a) {
+                    alert("失败");
+                    alert(JSON.stringify(x));
+                }
+            })
+        });
+        $("#ches1").click(function () {
+            $.ajax({
+                type: "Get",
+                url: "https://localhost:44305/api/User_Login",
+                //dataType: 'JSONP',  // 处理Ajax跨域问题
+                dataType: "json",
+                headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbiIsImp0aSI6IjFkNjZmNDA0LWJlMmItNDY0Zi1iODM2LTc1Y2U5NjI1OTRjZCIsImlhdCI6IjIwMTgvNy8xOSAxOjUxOjEyIiwiZXhwIjoxNTMyMDA4MjcyLCJpc3MiOiJBUElDb3JlIn0.UzZHT94SR7IRSNlWpicMAn-8mcwjqBYWQWJ7MBxxU6s" },
+                success: function (x) {
+                    alert("成功");
+                    alert(JSON.stringify(x));
+                },
+                Error: function (a) {
+                    alert("失败");
+                    alert(JSON.stringify(x));
+                }
+            })
+
+        });
+    </script>
+</body>
+</html>
