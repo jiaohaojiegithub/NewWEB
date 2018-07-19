@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace APICore.Controllers
 {
@@ -11,6 +12,7 @@ namespace APICore.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("any")]
     public class ValuesController : ControllerBase
     {
         /// <summary>

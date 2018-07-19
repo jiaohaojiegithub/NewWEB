@@ -39,6 +39,17 @@ namespace APICore
             services.AddScoped<IUser_LoginRepository, User_LoginRepository>();
             #endregion
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //跨域处理
+            services.AddCors(options =>
+            {
+                options.AddPolicy("any", builder =>
+                {
+                    builder.AllowAnyOrigin()//允许任何来源的主机访问
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();//指定处理cookie
+                });
+            });
             #region Swagger
             //作者信息
             services.AddSwaggerGen(c =>

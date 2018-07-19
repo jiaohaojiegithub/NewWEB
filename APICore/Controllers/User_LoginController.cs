@@ -6,6 +6,7 @@ using APICore.Interfaces;
 using APICore.Models;
 using DBModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace APICore.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("any")]//允许跨域请求
     [Authorize(Policy = "Admin")]
     public class User_LoginController : ControllerBase
     {
